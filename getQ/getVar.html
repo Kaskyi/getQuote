@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My variant</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="Get my variant in the Ip namespace">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <style media="screen">
+  .row{
+    margin-top: 10px;
+  }
+  header,footer{
+    background-color: #44BDB5;
+    color: #C6EEEB;
+  }
+  body{
+    background-color: #f5f5f5;
+
+  }
+  main{
+    background-color: white;
+  }
+  h2{
+    margin-bottom: 15pt;
+  }
+  footer{
+    padding: 10pt;
+  }
+  footer a{
+  color: white;
+  font-weight: bold;
+  }
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+  .btn-blue {
+    font-weight: bold;
+    color: #44BDB5;
+    background-color: white;
+    border-color: #44BDB5;
+    border-radius: 0px;
+  }
+  .btn-blue:focus,
+  .btn-blue.focus {
+    color: #44BDB5;
+    background-color: white;
+
+  }
+  .btn-blue:hover {
+    color: white;
+    background-color: #44BDB5;
+  }
+  .btn-blue:active,
+  .btn-blue.active,
+  .open > .dropdown-toggle.btn-blue {
+    color: #44BDB5;
+    background-color: white;
+    border-color: #44BDB5;
+  }
+  </style>
+</head>
+<body>
+  <header class="container-fluid">
+    <div class="row">
+      <h2 class="text-center">Find Youre Personal quote</h2>
+    </div>
+  </header>
+  
+  <main class="container">
+    <div class="row form-horizontal">
+      <div class="col-sm-12 col-md-8 col-md-offset-2">
+        <div class="form-group">
+          <label for="start_count" class="col-sm-3 control-label">Text:</label>
+          <div class="col-sm-6">
+            <input id="my_id" type="text"  class="form-control" placeholder=" quote">
+          </div>
+          <div class="col-sm-3">
+            <div class="filebox">
+              <label class="btn btn-default btn-file">
+                Browse <input type="file" style="display: none;" id="files" name="files[]" multiple>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-6 col-sm-offset-3 col-md-12 bs3-col">
+            <div class="output">
+              <output id="file_list"></output>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-6 col-sm-offset-3 col-md-offset-3 col-md-6">
+            <button type="submit" class="btn btn-blue btn-block" onclick="conutVar()">Find</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <table  class="table table-striped">
+        <thead>
+          <tr id = "1">
+            <th>Words</th>
+            <th>Number of your ZaliCaffka</th>
+            <th>Variant</th>
+          </tr>
+        </thead>
+        <tbody id="res">
+        </tbody>
+      </table>
+    </div>
+    <div class="jumbotron">
+      <div class="container">
+        <output id="source_text"></output>
+      </div>
+    </div>
+  </div>
+  </main>
+  
+  <footer class="container text-center">
+    <a href="https://vk.com/palivtzo">Our group</a>
+  </footer>
+  
+  <script type="text/javascript">
+  // Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // Great success! All the File APIs are supported.
+} else {
+  alert('The File APIs are not fully supported in this browser.');
+}
+  window.onload = function(){
+    document.getElementById('my_id').value =  localStorage.getItem("my_id");
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    document.getElementById('file_list').style.display = 'none'; 
+    document.getElementById('1').style.color = "#ffffff";  
+  }
+     function handleFileSelect(evt) {
+    var files = evt.target.files; 
+
+    // files is a FileList of File objects.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+     
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+           document.getElementById('source_text').innerHTML = e.target.result;
+             
+        };
+      })(f);
+ 
+      // Read in the image file as a data URL.
+      reader.readAsText(f,'windows-1251');
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate.toLocaleDateString(), '</li>');
+    }
+    document.getElementById('file_list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    document.getElementById('file_list').className = "alert alert-success";
+    document.getElementById('file_list').style.display = 'block';
+  }
+
+  
+  function conutVar() {  
+    document.getElementById('1').style.color = "#000000";  
+    let root = document.getElementById('res');
+    root.innerHTML=e.result;
+    
+    let mod_count = document.getElementById('mod_count').value;
+    let add_count = document.getElementById('add_count').value;
+    let my_id = document.getElementById('my_id').value;
+    let check_all = document.getElementById('check_all').checked;
+
+    mod_count = (!mod_count || typeof mod_count == 'undefined')?0:parseInt(mod_count);
+    add_count = (!add_count|| typeof add_count== 'undefined')?0:parseInt(add_count);
+    my_id = (!my_id || typeof my_id== 'undefined')?0:parseInt(my_id);
+
+    localStorage.setItem("mod_count", mod_count);
+    localStorage.setItem("add_count", add_count);
+    localStorage.setItem("my_id", my_id);
+    localStorage.setItem("check_all", check_all);
+
+    let myVar = (my_id % mod_count ) + add_count;
+
+    for (var k in students){
+      if (students.hasOwnProperty(k)) {
+        let tmp = (k % mod_count ) + add_count;
+        if (check_all || tmp == myVar) {
+          root.innerHTML+='<tr><td>' + students[k]['name'] +'</td><td>' + k  +'</td><td>' + tmp + '</td></tr>';
+        }
+      }
+    }
+  }
+  </script>
+</body>
+</html>
