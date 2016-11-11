@@ -13,7 +13,7 @@
     margin-top: 10px;
   }
   header,footer{
-    background-color: #44BDB5;
+    background-color: #000000;
     color: #C6EEEB;
   }
   body{
@@ -21,7 +21,11 @@
 
   }
   main{
+    margin-top: 0.9em;
     background-color: white;
+  }
+  mainRow{
+    margin-top: em;
   }
   h2{
     margin-bottom: 15pt;
@@ -79,30 +83,35 @@
   </style>
 </head>
 <body>
+  
+  
+  
+  
   <header class="container-fluid">
     <div class="row">
       <h2 class="text-center">Find Youre Personal quote</h2>
     </div>
+
   </header>
   
   <main class="container">
     <div class="row form-horizontal">
-      <div class="col-sm-12 col-md-8 col-md-offset-2">
-        <div class="form-group">
-          <label for="start_count" class="col-sm-3 control-label">Text:</label>
+      <div class="col-sm-12 col-md-8 col-md-offset-2" id ="mainRow">
+        <div class="form-group" >
+          <label for="start_count" class="col-sm-3 control-label">What Find???</label>
           <div class="col-sm-6">
-            <input id="my_id" type="text"  class="form-control" placeholder=" quote">
+            <input id="my_id" type="text"  class="form-control" placeholder="Quote">
           </div>
           <div class="col-sm-3">
             <div class="filebox">
               <label class="btn btn-default btn-file">
-                Browse <input type="file" style="display: none;" id="files" name="files[]" multiple>
+                Choose File <input type="file" style="display: none;" id="files" name="files[]" multiple>
               </label>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-12 bs3-col">
+          <div class="col-sm-6  col-md-12 bs3-col">
             <div class="output">
               <output id="file_list"></output>
             </div>
@@ -119,7 +128,7 @@
     <div class="row">
       <table  class="table table-striped">
         <thead>
-          <tr id = "1">
+          <tr id = "table_lable">
             <th>Words</th>
             <th>Number of your ZaliCaffka</th>
             <th>Variant</th>
@@ -142,48 +151,55 @@
   </footer>
   
   <script type="text/javascript">
-  // Check for the various File API support.
-if (window.File && window.FileReader && window.FileList && window.Blob) {
-  // Great success! All the File APIs are supported.
-} else {
-  alert('The File APIs are not fully supported in this browser.');
-}
+  
   window.onload = function(){
     document.getElementById('my_id').value =  localStorage.getItem("my_id");
     document.getElementById('files').addEventListener('change', handleFileSelect, false);
     document.getElementById('file_list').style.display = 'none'; 
-    document.getElementById('1').style.color = "#ffffff";  
+    document.getElementById('table_lable').style.color = "#ffffff";  
+    // Check for the various File API support.
+    // Great success! All the File APIs are supported.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+    } else {
+    alert('The File APIs are not fully supported in this browser.');
+    }
   }
-     function handleFileSelect(evt) {
-    var files = evt.target.files; 
+  function  customOnLoad(file,callback){
+    return function(e){
+      if (e.target.result != undefined)
+        callback(null,e.target.result)
+      else
+        callback(err,null);
+    }
+  }
+
+  function handleFileSelect(event){
+    var file = event.target.files[0]; 
 
     // files is a FileList of File objects.
     var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-     
-      var reader = new FileReader();
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-           document.getElementById('source_text').innerHTML = e.target.result;
-             
-        };
-      })(f);
- 
+    var reader = new FileReader();
+    reader.onload = customOnLoad(file,(err,data) => {
+      if (err == null){
+      document.getElementById('source_text').innerHTML = data.substring(0,data.length/90) + '........';
+      output.push('<li><strong>', escape(file.name), '</strong> (', file.type || 'n/a', ') - ',
+                  file.size, ' bytes, last modified: ',
+                  file.lastModifiedDate.toLocaleDateString(), '</li>');
+      document.getElementById('file_list').innerHTML = '<ul>' + output.join('') + '</ul>';
+      document.getElementById('file_list').className = "alert alert-success";
+      document.getElementById('file_list').style.display = 'block';
+      document.getElementById('table_lable').style.color = "#ffffff";
+      }
+    });
+      
+
       // Read in the image file as a data URL.
-      reader.readAsText(f,'windows-1251');
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate.toLocaleDateString(), '</li>');
-    }
-    document.getElementById('file_list').innerHTML = '<ul>' + output.join('') + '</ul>';
-    document.getElementById('file_list').className = "alert alert-success";
-    document.getElementById('file_list').style.display = 'block';
+    reader.readAsText(file,'windows-1251');
   }
 
   
   function conutVar() {  
-    document.getElementById('1').style.color = "#000000";  
+    document.getElementById('table_lable').style.color = "#000000";  
     let root = document.getElementById('res');
     root.innerHTML=e.result;
     
