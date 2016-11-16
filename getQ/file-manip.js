@@ -1,14 +1,16 @@
 let dataText = '';
-var root = document.getElementById('res');
+var rootH = document.getElementById('res_header');
 var source_text = document.getElementById('source_text');
 var prop = document.getElementById('my_id');
 var file_list = document.getElementById('file_list');
 var table_lable = document.getElementById('table_lable');
 
   window.onload = function(){
-    prop.value =  localStorage.getItem("my_id");
-
-    document.getElementById('files').addEventListener('change', function(){handleFileSelect(event,(err,data) => {findQ = findQ.bind(null,data);})}, false);
+   // prop.value =  localStorage.getItem("my_id");
+    document.getElementById('table_row').style.display = 'none'; 
+    document.getElementById('container_row').style.display = 'none';   
+    document.getElementById('files').addEventListener('change', function(){handleFileSelect(event,(err,data) => {
+        document.getElementById('container_row').style.display = 'block';findQ = findQ.bind(null,data);})}, false);
     document.getElementById('find_button').addEventListener('click', function(){findQ();});
     
     file_list.style.display = 'none'; 
@@ -62,26 +64,43 @@ var table_lable = document.getElementById('table_lable');
 
   function findQ(reader)
   {
+      document.getElementById('table_row').style.display = 'block';  
+      document.getElementById('container_row').style.display = 'none'; 
      var fileName = file_list.innerHTML.substring(0,file_list.innerHTML.indexOf(' '));
       //Set Style
       file_list.style.display = 'block'; 
       table_lable.style.color = "#000000";
-      root.innerHTML = '';
+      rootH.innerHTML = '';
       source_text.innerHTML = '';
       
-      
+      var count = 1;
       var position = 0;
       var temp = -1;
+      if (reader == undefined){
+          file_list.innerHTML = "Pleaaaaze SELECT some File";
+          file_list.className = "alert alert-warning";
+      }
+      else
       dataText = reader.result;
       while (true){
         temp = dataText.indexOf(prop.value,position);  
-        if (temp == -1 || prop.value == '' )
+        count++;
+        if (temp == -1 || prop.value == '' || count > 100 )
            break; 
-        root.innerHTML+='<tr><td>' + temp +'</td><td>' + dataText.substring(temp,temp+5)  +'</td><td>' + fileName + '</td></tr>';
+        rootH.innerHTML += dropWrap(dataText,temp,fileName,count);
         position = temp+1;
       }
-     if (prop.value == '' ||  root.innerHTML==''){
-        source_text.innerHTML = 'Empty result';
+     if (prop.value == '' ||  rootH.innerHTML==''){
+        document.getElementById('container_row').style.display = 'block';
+        document.getElementById('table_row').style.display = 'none'; 
+        source_text.innerHTML ='<h2 class=\'text-center\'>'+'<kbd>' + 'Empty result' + '</kbd>' + '</h2>';
      }
+    
   }
-  
+  function dropWrap(data,pos,name,number){
+     return htmlData = '<tr data-toggle="collapse" href="#collapse' + number + '"><td>' + pos + '</td>'
+     +'<td>' + data.substring(pos,pos+50) + '</td>' +
+     '<td>' + name + '</td></tr>' + '<tr><td colspan="3">' +
+     '<div id="collapse' + number +'" class="panel-collapse collapse"> <div class="panel-body"' + 
+     'id = "res_body">'+ data.substring(pos,pos+400) +'</div> </div> ' + '</td></tr>';
+  }
