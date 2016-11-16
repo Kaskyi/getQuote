@@ -12,13 +12,35 @@
       background-color: #f5f5f5;
     }
     
-    main {
-      margin-top: 0.9em;
-      background-color: white;
+
+    html,body {
+    height:100%;
+    background: url(./book.jpg) ;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+      
     }
-    
-    mainRow {
-      margin-top: em;
+
+
+
+    #mainRow {
+      margin-top: 85px;
+      
+    }
+
+      .footer 
+      {
+      position: relative;
+      margin-bottom: -150px; /* negative value of footer height */
+      height: 150px;
+      clear:both;
+      padding-top:20px;
+      color:#fff;
+      } 
+
+    main {
+      background-color: white;
     }
     
     h2 {
@@ -48,7 +70,7 @@
       font-size: 100px;
       text-align: right;
       filter: alpha(opacity=0);
-      opacity: 0;
+      opacity: 1;
       outline: none;
       background: white;
       cursor: inherit;

@@ -42,7 +42,7 @@ var table_lable = document.getElementById('table_lable');
     //Wraper with callback
     reader.onload = customOnLoad(file,(err,data) => {
       if (err == null){
-      document.getElementById('source_text').innerHTML = data.substring(0,data.length/10) + '........';
+      document.getElementById('source_text').innerHTML = data.substring(0,5500) + '........';
       output.push('<li><strong>', escape(file.name), '</strong> (', file.type || 'n/a', ') - ',
                   file.size, ' bytes, last modified: ',
                   file.lastModifiedDate.toLocaleDateString(), '</li>');
@@ -66,7 +66,7 @@ var table_lable = document.getElementById('table_lable');
   {
       document.getElementById('table_row').style.display = 'block';  
       document.getElementById('container_row').style.display = 'none'; 
-     var fileName = file_list.innerHTML.substring(0,file_list.innerHTML.indexOf(' '));
+      var fileName = file_list.innerHTML.substring(8,file_list.innerHTML.indexOf(' '));
       //Set Style
       file_list.style.display = 'block'; 
       table_lable.style.color = "#000000";
@@ -93,13 +93,13 @@ var table_lable = document.getElementById('table_lable');
      if (prop.value == '' ||  rootH.innerHTML==''){
         document.getElementById('container_row').style.display = 'block';
         document.getElementById('table_row').style.display = 'none'; 
-        source_text.innerHTML ='<h2 class=\'text-center\'>'+'<kbd>' + 'Empty result' + '</kbd>' + '</h2>';
+        source_text.innerHTML ='<h2 class=\'text-center\'>'+'<kbd>' + 'Sorry, we not find something ' + '</kbd>' + '</h2>';
      }
     
   }
   function dropWrap(data,pos,name,number){
      return htmlData = '<tr data-toggle="collapse" href="#collapse' + number + '"><td>' + pos + '</td>'
-     +'<td>' + data.substring(pos,pos+50) + '</td>' +
+     +'<td>' + data.substring(pos-10,pos+50) + '</td>' +
      '<td>' + name + '</td></tr>' + '<tr><td colspan="3">' +
      '<div id="collapse' + number +'" class="panel-collapse collapse"> <div class="panel-body"' + 
      'id = "res_body">'+ data.substring(pos,pos+400) +'</div> </div> ' + '</td></tr>';

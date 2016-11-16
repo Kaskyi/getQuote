@@ -1,107 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>My variant</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="description" content="Get my variant in the Ip namespace">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-  
-  
-  
-  
-  <header class="container-fluid">
-    <div class="row">
-      <h2 class="text-center">Find Youre Personal quote</h2>
-    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  </header>
-  
-  <main class="container">
-    <div class="row form-horizontal">
-      <div class="col-sm-12 col-md-8 col-md-offset-2" id ="mainRow">
-        <div class="form-group" >
-          <label for="start_count" class="col-sm-3 control-label">What Find???</label>
-          <div class="col-sm-6">
-            <input id="my_id" type="text"  class="form-control" placeholder="Quote">
-          </div>
-          <div class="col-sm-3">
-            <div class="filebox">
-              <label class="btn btn-default btn-file">
+</head>
+
+<body>
+
+
+  <!--<img src="./book.jpg" class="img-responsive image" alt="Responsive image">-->
+
+  <div class="container-fluid" id="imageContainer">
+    <header class="container navbar-fixed-top">
+      <div class="row ">
+        <h2 class="text-center">Find Youre Personal quote</h2>
+      </div>
+
+    </header>
+
+    <main class="container" id="mainRow">
+      <div class="row form-horizontal">
+        <div class="col-sm-12 col-md-8 col-md-offset-2" >
+          <div class="form-group">
+            <label for="start_count" class="col-sm-3 control-label">What Find???</label>
+            <div class="col-sm-6">
+              <input id="my_id" type="text" class="form-control" placeholder="Quote">
+            </div>
+            <div class="col-sm-3">
+              <div class="filebox">
+                <label class="btn btn-default btn-file">
                 Choose File <input type="file" style="display: none;" id="files" name="files[]" multiple>
               </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-6  col-md-12 bs3-col">
-            <div class="output">
-              <output id="file_list"></output>
+          <div class="form-group">
+            <div class="col-sm-6  col-md-12 bs3-col">
+              <div class="output text-center">
+                <output id="file_list"></output>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3 col-md-offset-3 col-md-6">
-            <button type="submit" class="btn btn-blue btn-block" id ="find_button">Find</button>
+          <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3 col-md-offset-3 col-md-6">
+              <button type="submit" class="btn btn-blue btn-block" id="find_button">Find</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" id="table_row">
-      <table  class="table table-striped">
-        <thead class="thead-inverse">
-          <tr id = "table_lable">
-            <th>Position</th>
-            <th>Quote</th>
-            <th>File</th>
-          </tr>
-        </thead>
-        <div class="panel-group">
-        <tbody id="res_header">
-          <div class="panel panel-default">
-            <div class="panel-heading" id="res_header1">
-              <h1 class="panel-title">
+      <div class="ss">
+      <div class="row" id="table_row">
+        <table class="table table-striped text-center">
+          <thead class="thead">
+            <tr id="table_lable">
+              <th>Position</th>
+              <th>Quote</th>
+              <th>File</th>
+            </tr>
+          </thead>
 
-                
-              </h1>
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading" id="res_header1">
+                <tbody id="res_header">
+                </tbody>
+              </div>
             </div>
-            <!--<div id="collapse1" class="panel-collapse collapse">
-              <div class="panel-body" id = "res_body">Panel Body</div>
-              <div class="panel-footer">Panel Footer</div>
-            </div>-->
           </div>
-        </tbody>
-        </div>
-        
-
-
-
-
-
-
-
-      </table>
-    </div>
-    <div class="jumbotron" id="container_row">
-      <div class="container">
-        <output id="source_text"></output>
+        </table>
       </div>
-    </div>
+      </div>
+      <div class="jumbotron" id="container_row">
+        <div class="container">
+          <output id="source_text"></output>
+        </div>
+      </div>
+
+    </main>
   </div>
-  </main>
-  
-  <footer class="container text-center">
+  <footer class="text-center navbar-fixed-bottom">
     <a href="https://vk.com/palivtzo">Our group</a>
   </footer>
-  
-  <script src="./file-manip.js">
-  </script>
+
 </body>
+<script src="./file-manip.js">
+  </script>
+
 </html>
