@@ -4,9 +4,10 @@ var source_text = document.getElementById('source_text');
 var prop = document.getElementById('my_id');
 var file_list = document.getElementById('file_list');
 var table_lable = document.getElementById('table_lable');
-
+var mainRow = document.getElementById('mainRow');
   window.onload = function(){
    // prop.value =  localStorage.getItem("my_id");
+    jQ();
     document.getElementById('table_row').style.display = 'none'; 
     document.getElementById('container_row').style.display = 'none';   
     document.getElementById('files').addEventListener('change', function(){handleFileSelect(event,(err,data) => {
@@ -77,7 +78,7 @@ var table_lable = document.getElementById('table_lable');
       var position = 0;
       var temp = -1;
       if (reader == undefined){
-          file_list.innerHTML = "Pleaaaaze SELECT some File";
+          file_list.innerHTML = "<h3>Pleaaaaze SELECT some File</h3>";
           file_list.className = "alert alert-warning";
       }
       else
@@ -103,4 +104,12 @@ var table_lable = document.getElementById('table_lable');
      '<td>' + name + '</td></tr>' + '<tr><td colspan="3">' +
      '<div id="collapse' + number +'" class="panel-collapse collapse"> <div class="panel-body"' + 
      'id = "res_body">'+ data.substring(pos,pos+400) +'</div> </div> ' + '</td></tr>';
+  }
+
+  // On Click change with animation margin-top
+  function jQ() {
+    mainRow.onclick = function() {
+    console.log("jQ");
+    mainRow.id = 'mainRowClick';
+};
   }

@@ -22,13 +22,22 @@
       
     }
 
-
-
-    #mainRow {
-      margin-top: 85px;
-      
+    #findLabel {
+      font-size: large;
     }
 
+    #mainRow {
+      margin-top: 44em;
+      width: 100em;
+      background: #FFFD33;
+    }
+    
+    #mainRowClick{
+      margin-top: 85px;
+      transition-property: margin-top,width,background;
+      transition-duration: 3s;
+      background: #fff;
+    }
       .footer 
       {
       position: relative;
