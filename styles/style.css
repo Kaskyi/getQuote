@@ -15,7 +15,7 @@
 
     html,body {
     height:100%;
-    background: url(./book.jpg) ;
+    background: url(../resources/book.jpg) ;
     min-height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
