@@ -41,7 +41,7 @@
       .footer
       {
       position: relative;
-      margin-bottom: -150px; /* negative value of footer height */
+      margin-bottom: -150px;/*Make git conflict*/
       height: 150px;
       clear:both;
       padding-top:20px;
